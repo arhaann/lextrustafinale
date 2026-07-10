@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers & Internships | Lextrusta</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --midnight-navy: #071426;
+            --royal-blue: #123458;
+            --luxury-gold: #C8A96A;
+            --ivory: #FAF7F2;
+            --white: #FFFFFF;
+            --dark-navy: #0F172A;
+            --light-gray: #E8E8E8;
+            --pale-beige: #E6DFD3; /* Button color from the image */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --radius: 8px; /* Slightly sharper corners to match image */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--ivory);
+            color: var(--dark-navy);
+            line-height: 1.6;
+        }
+
+        /* --- Unified Navigation Bar --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: var(--transition);
+            background: transparent;
+        }
+        nav.scrolled {
+            background: rgba(7, 20, 38, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .logo { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: var(--white); text-decoration: none; }
+        .logo span { display: block; font-family: var(--font-body); font-size: 0.7rem; font-weight: 300; letter-spacing: 2px; color: var(--luxury-gold); text-transform: uppercase; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--white); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; text-decoration: none; transition: var(--transition); letter-spacing: 0.5px;}
+        .nav-links a:hover, .nav-links a.active { color: var(--luxury-gold); }
+
+        /* --- Integrated Hero Section (Matches About & Home) --- */
+        .hero {
+            height: 60vh; 
+            background: linear-gradient(rgba(7, 20, 38, 0.8), rgba(7, 20, 38, 0.95)), url('https://advocatetanmoy.com/wp-content/uploads/2017/05/advocate.jpg') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+        }
+        .hero h1 {
+            color: var(--white); font-size: 4rem; max-width: 900px; margin-bottom: 20px;
+            animation: fadeUp 1s ease forwards; opacity: 0; transform: translateY(30px); font-family: var(--font-heading); font-weight: 700;
+        }
+        .hero h1 span { color: var(--luxury-gold); font-style: italic; }
+        .hero p {
+            color: var(--light-gray); font-size: 1.2rem; max-width: 700px; margin-bottom: 40px;
+            animation: fadeUp 1s ease forwards 0.3s; opacity: 0; transform: translateY(30px);
+        }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Custom Career Sections (Based on Provided Images) --- */
+        .section-padding { padding: 80px 5% 80px; max-width: 1100px; margin: 0 auto; }
+
+        /* Banner from Image 1 */
+        .career-banner {
+            background: linear-gradient(135deg, #222d3d 0%, #635f52 100%);
+            padding: 60px;
+            border-radius: var(--radius);
+            color: var(--midnight-navy);
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        .career-banner .subheading {
+            color: #d1b482;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 15px;
+        }
+        .career-banner h2 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #0b1525;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            max-width: 800px;
+        }
+        .career-banner p {
+            color: #fcfcfc;
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        .career-banner .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+        .career-banner .btn {
+            background-color: var(--pale-beige);
+            color: var(--midnight-navy);
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .career-banner .btn:hover {
+            background-color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Cards from Image 2 */
+        .career-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .career-card {
+            background-color: #FAF5EB; /* Warm ivory from image */
+            border: 1px solid #EBE3D5;
+            border-radius: var(--radius);
+            padding: 40px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: var(--transition);
+        }
+        .career-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        .card-left {
+            flex: 0 0 35%;
+        }
+        .card-left .tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #555;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .card-left h3 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--midnight-navy);
+            line-height: 1.1;
+        }
+        .card-right {
+            flex: 1;
+            padding-top: 30px;
+        }
+        .card-right p {
+            font-size: 1.05rem;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        .card-right .contact-info {
+            font-size: 1.05rem;
+            color: #222;
+            margin-bottom: 5px;
+        }
+        .card-right .contact-info strong {
+            font-weight: 600;
+        }
+        .card-right .contact-info a {
+            color: var(--midnight-navy);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .card-right .action-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: 700;
+            color: var(--midnight-navy);
+            text-decoration: none;
+            font-size: 1.05rem;
+        }
+        .card-right .action-link:hover {
+            color: var(--luxury-gold);
+        }
+
+        /* --- Footer Styles --- */
+        footer { background-color: #040A14; color: var(--light-gray); padding: 60px 5% 30px; margin-top: 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: var(--white); margin-bottom: 20px; font-size: 1.1rem; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--light-gray); text-decoration: none; transition: var(--transition); }
+        .footer-col ul li a:hover { color: var(--luxury-gold); }
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.9rem; opacity: 0.6; }
+
+        @media (max-width: 900px) {
+            .career-card { flex-direction: column; gap: 10px; padding: 30px; }
+            .card-right { padding-top: 10px; }
+            .career-banner h2 { font-size: 2.5rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .career-banner { padding: 40px 25px; }
+            .career-banner .btn-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MATCHING NAVIGATION BAR -->
+    <nav id="navbar">
+        <a href="index.html" class="logo">Lextrusta <span>Trust The Law</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="dropdown" id="pubDropdown">
+                <a href="#" class="dropbtn" id="pubDropBtn">Publications <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="blogs.html">Blog</a></li>
+                    <li><a href="article.html">Article</a></li>
+                    <li><a href="research.html">Research Paper</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="careers.html">Career</a></li>
+            <li><a href="opportunities.html">Opportunities</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="advisory.html">Advisory Board</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <img src="logo.jpeg" alt="Lextrusta Logo" style="height: 70px; width: auto; display: block; border-radius: 4px;">
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <h1>Legal <span>Careers</span></h1>
+        <p>Your gateway to premium internships, legal placements, and professional growth.</p>
+    </header>
+
+    <!-- CAREER CONTENT SECTION -->
+    <section class="section-padding">
+        
+
+
+        <!-- Career Cards (from image_5935c5.png) -->
+        <div class="career-cards-container">
+            
+            <!-- Card 1: Students -->
+            <div class="career-card">
+                <div class="card-left">
+                    <span class="tag">Students</span>
+                    <h3>Internship<br>Opportunities</h3>
+                </div>
+                <div class="card-right">
+                    <p>Find legal research, drafting, litigation, corporate law and remote internship updates suitable for law students.</p>
+                    <div class="contact-info">
+                        <strong>Email:</strong> <a href="mailto:Official.lextrusta@gmail.com">Official.lextrusta@gmail.com</a>
+                    </div>
+                    <a href="#" class="action-link">Open internships</a>
+                </div>
+            </div>
+
+            <!-- Card 2: Professionals -->
+            <div class="career-card">
+                <div class="card-left">
+                    <span class="tag">Professionals</span>
+                    <h3>Hiring</h3>
+                </div>
+                <div class="card-right">
+                    <p>Explore advocate hiring, legal associate roles, law graduate jobs, consultant posts and firm recruitment updates.</p>
+                    <div class="contact-info">
+                        <strong>Email:</strong> <a href="mailto:lextrusta@gmail.com">lextrusta@gmail.com</a>
+                    </div>
+                    <a href="#" class="action-link">Open jobs</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+
+
+    <!-- NAVBAR SCROLL SCRIPT -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+<div id="footer-placeholder"></div>
+
+    <script>
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
+</body>
+</html>

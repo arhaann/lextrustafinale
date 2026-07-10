@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles | Lextrusta</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --midnight-navy: #071426;
+            --royal-blue: #123458;
+            --luxury-gold: #C8A96A;
+            --ivory: #FAF7F2;
+            --white: #FFFFFF;
+            --dark-navy: #0F172A;
+            --light-gray: #E8E8E8;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.3s ease;
+            --radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background-color: var(--ivory); color: var(--dark-navy); line-height: 1.6; }
+
+        /* --- Unified Navigation Bar --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: var(--transition);
+            background: rgba(7, 20, 38, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .logo { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: var(--white); text-decoration: none; }
+        .logo span { display: block; font-family: var(--font-body); font-size: 0.7rem; font-weight: 300; letter-spacing: 2px; color: var(--luxury-gold); text-transform: uppercase; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--white); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; text-decoration: none; transition: var(--transition); letter-spacing: 0.5px;}
+        .nav-links a:hover, .nav-links a.active { color: var(--luxury-gold); }
+
+        /* --- Custom Hero Section (Matches Screenshot) --- */
+        .hero {
+            margin-top: 90px;
+            padding: 80px 5%;
+            background: linear-gradient(rgba(10, 15, 25, 0.85), rgba(10, 15, 25, 0.9)), url('https://blog.ipleaders.in/wp-content/uploads/2020/02/1476277817-715-1.jpeg') center/cover;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+        .hero-left { max-width: 600px; }
+        .hero-left .sub-tag { color: var(--luxury-gold); font-size: 0.85rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 15px; }
+        .hero-left h1 { font-family: var(--font-heading); font-size: 4rem; color: var(--white); line-height: 1.1; margin-bottom: 20px; font-weight: 700; }
+        .hero-left p { color: #d0d0d0; font-size: 1.15rem; }
+        
+        .hero-right { flex: 1; max-width: 450px; }
+        .search-card { background: var(--white); padding: 40px; border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .search-card label { display: block; color: #555; font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+        .search-card input { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem; margin-bottom: 30px; outline: none; background: #FFFAF0; }
+        .search-card input:focus { border-color: var(--midnight-navy); }
+        .search-card h2 { font-family: var(--font-heading); font-size: 3.5rem; color: var(--midnight-navy); line-height: 1; margin-bottom: 5px; }
+        .search-card p { color: #666; font-size: 0.95rem; font-weight: 500; }
+
+        /* --- Main Content Section --- */
+        .section-padding { padding: 60px 5% 80px; max-width: 1300px; margin: 0 auto; }
+        
+        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+        .header-row h2 { font-family: var(--font-heading); font-size: 3rem; color: var(--midnight-navy); }
+        
+        /* Filters */
+        .filters { display: flex; gap: 10px; flex-wrap: wrap; }
+        .filter-btn {
+            background-color: transparent; border: 1px solid #ddd; color: #444;
+            padding: 8px 18px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;
+            cursor: pointer; transition: var(--transition); font-family: var(--font-body);
+        }
+        .filter-btn:hover { background-color: #f0f0f0; }
+        .filter-btn.active { background-color: var(--midnight-navy); color: var(--white); border-color: var(--midnight-navy); }
+
+        /* Grid */
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
+        
+        .card { display: flex; flex-direction: column; transition: var(--transition); background: var(--white); border-radius: 4px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #eaeaea; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        
+        .card-img {
+            width: 100%; height: 220px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 20px; position: relative; overflow: hidden;
+        }
+        
+        /* Custom Art Blocks from Screenshot */
+        .img-art-const { background-color: #EBE5D9; border-top: 15px solid #A3B19B; color: #3A4633; }
+        .img-art-const i { font-size: 3rem; margin-bottom: 15px; opacity: 0.8; }
+        .img-art-const h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        
+        .img-art-crim { background-color: #E67A53; color: white; }
+        .img-art-crim h3 { font-size: 4rem; font-weight: 900; letter-spacing: 5px; opacity: 0.9; margin: 0; line-height: 1;}
+        .img-art-crim p { font-size: 1rem; font-weight: 600; letter-spacing: 2px; }
+        
+        .img-art-corp { background-color: #123458; color: white; }
+        .img-art-corp i { font-size: 3.5rem; color: #C8A96A; margin-bottom: 15px; }
+        .img-art-corp h3 { font-size: 1.2rem; font-weight: 600; letter-spacing: 3px; }
+
+        .img-art-tech { background-color: #613DC1; color: white; }
+        .img-art-tech i { font-size: 3.5rem; color: #F8E287; margin-bottom: 15px; }
+        .img-art-tech h3 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+
+        /* Card Content */
+        .card-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-category { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+        
+        .cat-const { color: #5B7051; }
+        .cat-crim { color: #D35400; }
+        .cat-corp { color: #2980B9; }
+        .cat-tech { color: #8E44AD; }
+
+        .card-title { font-family: var(--font-heading); font-size: 1.5rem; color: var(--midnight-navy); font-weight: 700; line-height: 1.3; margin-bottom: 15px; text-decoration: none; }
+        .card-title:hover { color: var(--luxury-gold); }
+        .card-desc { color: #555; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+        
+        .card-tags { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .tag { background-color: #F0F0F0; color: #555; font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid #ddd; }
+        
+        .read-more { font-weight: 700; color: var(--midnight-navy); font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: var(--transition); border-top: 1px solid #eee; padding-top: 15px; }
+        .read-more:hover { color: var(--luxury-gold); gap: 8px; }
+
+        .no-results { display: none; grid-column: 1 / -1; text-align: center; padding: 40px; font-size: 1.2rem; color: #666; }
+
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-left h1 { font-size: 3rem; }
+            .hero-right { width: 100%; max-width: 100%; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .header-row { flex-direction: column; align-items: flex-start; }
+            .blog-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="index.html" class="logo">Lextrusta <span>Trust The Law</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="dropdown" id="pubDropdown">
+                <a href="#" class="dropbtn" id="pubDropBtn">Publications <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="blogs.html">Blog</a></li>
+                    <li><a href="article.html">Article</a></li>
+                    <li><a href="research.html">Research Paper</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="careers.html">Career</a></li>
+            <li><a href="opportunities.html">Opportunities</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="advisory.html">Advisory Board</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <img src="logo.jpeg" alt="Lextrusta Logo" style="height: 70px; width: auto; display: block; border-radius: 4px;">
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-left">
+            <span class="sub-tag">Lextrusta Publications</span>
+            <h1>Articles</h1>
+            <p>Insights, legal analysis and opinion pieces.</p>
+        </div>
+        <div class="hero-right">
+            <div class="search-card">
+                <label>Search articles</label>
+                <input type="text" id="searchInput" placeholder="Search by topic, author, or keyword">
+                <h2 id="activeCount">4</h2>
+                <p>active articles</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        
+        <div class="header-row">
+            <h2>Articles</h2>
+            <div class="filters" id="filterContainer">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="constitutional">Constitutional</button>
+                <button class="filter-btn" data-filter="criminal">Criminal</button>
+                <button class="filter-btn" data-filter="corporate">Corporate</button>
+                <button class="filter-btn" data-filter="tech">Tech Law</button>
+            </div>
+        </div>
+
+        <div class="blog-grid" id="blogGrid">
+            
+            <article class="card" data-category="constitutional">
+                <div class="card-img img-art-const">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <h3>LEGAL ARTICLE</h3>
+                </div>
+                <div class="card-body">
+                    <div class="card-category cat-const">CONSTITUTIONAL</div>
+                    <a href="#" class="card-title">The Evolution of Article 21: Right to Privacy in the Digital Age</a>
+                    <p class="card-desc">An analysis of how the fundamental right to life and personal liberty has expanded to include data privacy following landmark judgments.</p>
+                    <div class="card-tags"><span class="tag">Constitution</span><span class="tag">Rights</span></div>
+                    <a href="#" class="read-more">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="card" data-category="criminal">
+                <div class="card-img img-art-crim">
+                    <h3>LAW</h3>
+                    <p>CRIMINAL JUSTICE</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-category cat-crim">CRIMINAL</div>
+                    <a href="#" class="card-title">Reforming the Bail System in India: Challenges and Pathways</a>
+                    <p class="card-desc">A critical look at the principle of "Bail, not jail" and the systemic issues leading to the overcrowding of undertrials in Indian prisons.</p>
+                    <div class="card-tags"><span class="tag">Criminal Law</span><span class="tag">Bail</span></div>
+                    <a href="#" class="read-more">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="card" data-category="corporate">
+                <div class="card-img img-art-corp">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <h3>CORPORATE LAW</h3>
+                </div>
+                <div class="card-body">
+                    <div class="card-category cat-corp">CORPORATE</div>
+                    <a href="#" class="card-title">Corporate Governance and the Role of Independent Directors</a>
+                    <p class="card-desc">Examining the effectiveness of independent directors in preventing corporate fraud and ensuring ethical management in large enterprises.</p>
+                    <div class="card-tags"><span class="tag">Corporate</span><span class="tag">Governance</span></div>
+                    <a href="#" class="read-more">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="card" data-category="tech">
+                <div class="card-img img-art-tech">
+                    <i class="fa-solid fa-microchip"></i>
+                    <h3>TECH & IP LAW</h3>
+                </div>
+                <div class="card-body">
+                    <div class="card-category cat-tech">TECH LAW</div>
+                    <a href="#" class="card-title">AI and Copyright: Who owns AI-generated content?</a>
+                    <p class="card-desc">Navigating the complex intellectual property landscape when artificial intelligence creates art, literature, and functional code.</p>
+                    <div class="card-tags"><span class="tag">AI</span><span class="tag">Copyright</span></div>
+                    <a href="#" class="read-more">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <div class="no-results" id="noResultsMsg">No articles found matching your criteria.</div>
+        </div>
+    </section>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.card');
+            const searchInput = document.getElementById('searchInput');
+            const activeCount = document.getElementById('activeCount');
+            const noResultsMsg = document.getElementById('noResultsMsg');
+
+            let currentFilter = 'all';
+            let currentSearch = '';
+
+            // Initialize Count
+            updateCount();
+
+            // Filter Button Click Event
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active class
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    currentFilter = btn.getAttribute('data-filter');
+                    filterCards();
+                });
+            });
+
+            // Search Input Event
+            searchInput.addEventListener('input', (e) => {
+                currentSearch = e.target.value.toLowerCase();
+                filterCards();
+            });
+
+            // Logic to filter and show/hide cards
+            function filterCards() {
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    const textContent = card.innerText.toLowerCase();
+                    
+                    const matchesFilter = (currentFilter === 'all' || category === currentFilter);
+                    const matchesSearch = textContent.includes(currentSearch);
+
+                    if (matchesFilter && matchesSearch) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                activeCount.innerText = visibleCount;
+                
+                if (visibleCount === 0) {
+                    noResultsMsg.style.display = 'block';
+                } else {
+                    noResultsMsg.style.display = 'none';
+                }
+            }
+
+            function updateCount() {
+                activeCount.innerText = cards.length;
+            }
+        });
+    </script>
+    <div id="footer-placeholder"></div>
+
+    <script>
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
+</body>
+</html>

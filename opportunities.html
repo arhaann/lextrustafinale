@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunity Blogs | Lextrusta</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        :root {
+            --midnight-navy: #071426;
+            --royal-blue: #123458;
+            --luxury-gold: #C8A96A;
+            --ivory: #FAF7F2;
+            --white: #FFFFFF;
+            --dark-navy: #0F172A;
+            --light-gray: #E8E8E8;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Updated to match index.html */
+            --radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background-color: var(--ivory); color: var(--dark-navy); line-height: 1.6; }
+
+        /* --- Unified Navigation Bar (Copied exactly from index.html) --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+            /* Preserved dark blue background so it overlays the ivory body smoothly */
+            background: rgba(7, 20, 38, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        nav.scrolled {
+            padding: 15px 5%;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--luxury-gold);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--luxury-gold);
+        }
+
+        /* --- Click Dropdown Rules --- */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Dropdown menu hidden by default */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--midnight-navy);
+            border: 1px solid rgba(200, 169, 106, 0.3);
+            min-width: 180px;
+            border-radius: 4px;
+            list-style: none;
+            padding: 10px 0;
+            margin-top: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 1001;
+        }
+
+        /* Show menu only when .active class is applied via JS */
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        /* Rotate arrow when active */
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content li a {
+            color: var(--white) !important;
+            padding: 12px 20px;
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .dropdown-content li a:hover {
+            background-color: var(--royal-blue);
+            color: var(--luxury-gold) !important;
+            padding-left: 24px;
+        }
+
+        /* --- Custom Hero Section --- */
+        .hero {
+            margin-top: 90px;
+            padding: 80px 5%;
+            background: linear-gradient(rgba(10, 15, 25, 0.85), rgba(10, 15, 25, 0.9)), url('https://sc0.blr1.digitaloceanspaces.com/large/880725-qiaxtbfwxr-1527677437.jpeg') center/cover;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+        .hero-left { max-width: 600px; }
+        .hero-left .sub-tag { color: var(--luxury-gold); font-size: 0.85rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 15px; }
+        .hero-left h1 { font-family: var(--font-heading); font-size: 3.5rem; color: var(--white); line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+        .hero-left p { color: #d0d0d0; font-size: 1.1rem; }
+        
+        .hero-right { flex: 1; max-width: 450px; }
+        .search-card { background: var(--white); padding: 40px; border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .search-card label { display: block; color: #555; font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+        .search-card input { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem; margin-bottom: 30px; outline: none; background: #FFFAF0; }
+        .search-card input:focus { border-color: var(--midnight-navy); }
+        .search-card h2 { font-family: var(--font-heading); font-size: 3rem; color: var(--midnight-navy); line-height: 1; margin-bottom: 5px; }
+        .search-card p { color: #666; font-size: 0.95rem; }
+
+        /* --- Main Content Section --- */
+        .section-padding { padding: 60px 5% 80px; max-width: 1300px; margin: 0 auto; }
+        
+        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+        .header-row h2 { font-family: var(--font-heading); font-size: 3rem; color: var(--midnight-navy); }
+        
+        /* Filters */
+        .filters { display: flex; gap: 10px; flex-wrap: wrap; }
+        .filter-btn {
+            background-color: transparent; border: 1px solid #ddd; color: #444;
+            padding: 8px 18px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;
+            cursor: pointer; transition: var(--transition); font-family: var(--font-body);
+        }
+        .filter-btn:hover { background-color: #f0f0f0; }
+        .filter-btn.active { background-color: var(--midnight-navy); color: var(--white); border-color: var(--midnight-navy); }
+
+        /* Grid */
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
+        
+        .card { display: flex; flex-direction: column; transition: var(--transition); }
+        .card:hover { transform: translateY(-3px); }
+        
+        .card-img {
+            width: 100%; height: 220px; border-radius: 2px; margin-bottom: 20px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 20px; position: relative; overflow: hidden;
+            background-size: cover; background-position: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        /* Simulated Images from Screenshots using CSS styling for exact matching */
+        .img-internship { background-color: #FF7B54; color: white; }
+        .img-internship h3 { font-size: 2.5rem; font-weight: 900; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase; z-index: 2; position: relative;}
+        .img-internship p { font-size: 0.75rem; font-weight: 700; z-index: 2; position: relative; }
+        
+        .img-job-1 { background-color: #EBDCBB; color: #3A2A18; }
+        .img-job-1 h3 { font-size: 2.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 10px; }
+        .img-job-1 span { background: #3A2A18; color: white; padding: 4px 10px; font-size: 0.75rem; font-weight: 700; border-radius: 4px; }
+        
+        .img-job-2 { background-color: #F8E287; color: #111; display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 15px;}
+        .img-job-2 h3 { font-size: 1.8rem; font-weight: 900; line-height: 1.1; text-align: left; }
+        
+        .img-job-3 { background-color: #613DC1; color: white; justify-content: flex-start; align-items: flex-start; padding: 30px;}
+        .img-job-3 h3 { font-size: 2rem; font-weight: 900; margin-bottom: 5px; }
+        .img-job-3 p { font-size: 0.8rem; font-weight: 700; }
+        .img-job-3 span { background: #F8E287; color: black; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; margin-top: 10px; border-radius: 2px; }
+
+        .img-course { background-color: #EBE5D9; border-top: 30px solid #97B2A6; justify-content: center; }
+        .img-course h3 { font-size: 1.8rem; font-weight: 900; color: #724214; line-height: 1.2; text-align: right; width: 100%;}
+        
+        .img-recruit { background-color: #F4F7FB; justify-content: center; align-items: center;}
+        .img-recruit h3 { font-size: 1.4rem; font-weight: 900; color: #3366A4; border: 4px solid #3366A4; padding: 30px; border-radius: 10px;}
+
+        /* Card Content */
+        .card-category { font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+        .cat-internship { color: #00838F; }
+        .cat-job { color: #D32F2F; }
+        .cat-course { color: #8E24AA; }
+        .cat-recruit { color: #00796B; }
+
+        .card-title { font-family: var(--font-heading); font-size: 1.6rem; color: var(--midnight-navy); font-weight: 700; line-height: 1.3; margin-bottom: 15px; text-decoration: none; }
+        .card-title:hover { color: var(--luxury-gold); }
+        .card-desc { color: #555; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+        
+        .card-tags { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tag { background-color: #EADDCD; color: #444; font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+        
+        .read-more { font-weight: 700; color: var(--midnight-navy); font-size: 0.95rem; text-decoration: none; display: inline-block; }
+        .read-more:hover { color: var(--luxury-gold); }
+
+        .no-results { display: none; grid-column: 1 / -1; text-align: center; padding: 40px; font-size: 1.2rem; color: #666; }
+
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-left h1 { font-size: 2.8rem; }
+            .hero-right { width: 100%; max-width: 100%; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .header-row { flex-direction: column; align-items: flex-start; }
+            .blog-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="index.html" class="logo">Lextrusta <span>Trust The Law</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="dropdown" id="pubDropdown">
+                <a href="#" class="dropbtn" id="pubDropBtn">Publications <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="blogs.html">Blog</a></li>
+                    <li><a href="article.html">Article</a></li>
+                    <li><a href="research.html">Research Paper</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="careers.html">Career</a></li>
+            <li><a href="opportunities.html">Opportunities</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="advisory.html">Advisory Board</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <img src="logo.jpeg" alt="Lextrusta Logo" style="height: 70px; width: auto; display: block; border-radius: 4px;">
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-left">
+            <span class="sub-tag">Lextrusta Publications</span>
+            <h1>Blogs, internships, jobs and legal updates.</h1>
+            <p>Browse Lextrusta posts in the same portal experience, with opportunities and legal updates opening below for easy reading.</p>
+        </div>
+        <div class="hero-right">
+            <div class="search-card">
+                <label>Search opportunities</label>
+                <input type="text" id="searchInput" placeholder="Search by role, city, firm or category">
+                <h2 id="activeCount">10</h2>
+                <p>active blog posts</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        
+        <div class="header-row">
+            <h2>Opportunity Blogs</h2>
+            <div class="filters" id="filterContainer">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="internship">Internship</button>
+                <button class="filter-btn" data-filter="jobs">Jobs</button>
+                <button class="filter-btn" data-filter="course">Course</button>
+                <button class="filter-btn" data-filter="recruitment">Recruitment</button>
+            </div>
+        </div>
+
+        <div class="blog-grid" id="blogGrid">
+            
+            <article class="card" data-category="internship">
+                <div class="card-img img-internship">
+                    <h3>HIRING !!</h3>
+                    <p>INTERNSHIP LEGAL POSITION</p>
+                    <p style="margin-top:20px; font-weight: 500;">Apply now for legal research and drafting</p>
+                </div>
+                <div class="card-category cat-internship">INTERNSHIP, OPPORTUNITY</div>
+                <a href="#" class="card-title">Criminal Drafting Internship Opportunity at Lextrusta: Apply by June 6</a>
+                <p class="card-desc">Remote internship for students interested in criminal law drafting, legal research, case summaries and practical procedural learning.</p>
+            </article>
+
+            <article class="card" data-category="internship">
+                <div class="card-img img-internship">
+                    <h3>HIRING !!</h3>
+                    <p>INTERNSHIP LEGAL POSITION</p>
+                    <p style="margin-top:20px; font-weight: 500;">Apply now for legal research and drafting</p>
+                </div>
+                <div class="card-category cat-internship">INTERNSHIP</div>
+                <a href="#" class="card-title">Internship Opportunity at Verdad Legal | June-July 2026</a>
+                <p class="card-desc">Physical internship for law students interested in litigation support, drafting, legal research and chamber practice exposure.</p>
+            </article>
+
+            <article class="card" data-category="jobs">
+                <div class="card-img img-job-1">
+                    <h3>We Are<br>HIRING!</h3>
+                    <span>ADVOCATE POSITION</span>
+                </div>
+                <div class="card-category cat-job">JOBS</div>
+                <a href="#" class="card-title">Hiring for Advocate at Tripaksha Litigation | Gurugram</a>
+                <p class="card-desc">Litigation office inviting applications for an advocate role involving drafting, court coordination, client conferences and case preparation.</p>
+            </article>
+
+            <article class="card" data-category="jobs">
+                <div class="card-img img-job-2">
+                    <div style="width:50px; height:50px; border:6px solid #111; border-radius:50%; border-bottom-color:transparent;"></div>
+                    <h3>LEGAL JO<br>VACANCY</h3>
+                </div>
+                <div class="card-category cat-job">JOBS</div>
+                <a href="#" class="card-title">Hiring Announcement for Senior/Lead Legal Consultant at Pacta | Bengaluru</a>
+                <p class="card-desc">Senior legal consultant role for experienced candidates with contract review, advisory, policy and...</p>
+            </article>
+
+            <article class="card" data-category="jobs">
+                <div class="card-img img-job-1">
+                    <h3>We Are<br>HIRING!</h3>
+                    <span>JUNIOR PATENT DRAFTER</span>
+                </div>
+                <div class="card-category cat-job">JOBS</div>
+                <a href="#" class="card-title">Job Opportunity for Junior Patent Drafter at IPQuad Partners | Noida</a>
+                <p class="card-desc">Patent drafting opportunity for candidates with interest in intellectual property, invention disclosure analysis and patent specification drafting.</p>
+            </article>
+
+            <article class="card" data-category="jobs">
+                <div class="card-img img-job-1" style="background:#fff; border: 1px solid #eee;">
+                    <h3 style="color:#A33B3B;">HIRING<br><span style="background:transparent; color:#C46B6B; font-size:1.5rem; padding:0;">Legal Manager</span></h3>
+                    <p style="font-size:0.75rem; font-weight:700; color:#666; margin-top:20px;">PQE 6-8 years Fintech & Legal Mysore</p>
+                </div>
+                <div class="card-category cat-job">JOBS</div>
+                <a href="#" class="card-title">Job Opportunity for Legal Manager at Vahura | Mysore</a>
+                <p class="card-desc">Legal manager opening for experienced professionals in fintech and legal operations with non-litigation advisory exposure.</p>
+                <div class="card-tags"><span class="tag">Mysore</span><span class="tag">Apply now</span></div>
+                <a href="#" class="read-more">Read more</a>
+            </article>
+
+            <article class="card" data-category="jobs">
+                <div class="card-img img-job-3">
+                    <h3>JOB<br>VACANCY!</h3>
+                    <p>Position: Legal</p>
+                    <span>APPLY NOW</span>
+                </div>
+                <div class="card-category cat-job">JOBS</div>
+                <a href="#" class="card-title">Job Opportunity for Law Graduates at Kaabil Finance | Jaipur</a>
+                <p class="card-desc">Opportunity for law graduates to work on finance documentation, legal notices, compliance support and recovery coordination.</p>
+                <div class="card-tags"><span class="tag">Jaipur</span><span class="tag">Applications open</span></div>
+                <a href="#" class="read-more">Read more</a>
+            </article>
+
+            <article class="card" data-category="jobs">
+                <div class="card-img img-job-2">
+                    <div style="width:50px; height:50px; border:6px solid #111; border-radius:50%; border-bottom-color:transparent;"></div>
+                    <h3>LEGAL JO<br>VACANCY</h3>
+                </div>
+                <div class="card-category cat-job">JOBS</div>
+                <a href="#" class="card-title">Job Opportunity for Associate - Litigation at Edictum Law and Co. | Delhi</a>
+                <p class="card-desc">Associate litigation role for drafting pleadings, legal research, court appearances and client case file management.</p>
+                <div class="card-tags"><span class="tag">Delhi</span><span class="tag">Apply soon</span></div>
+                <a href="#" class="read-more">Read more</a>
+            </article>
+
+            <article class="card" data-category="course">
+                <div class="card-img img-course">
+                    <p style="text-align:right; width:100%; font-size:0.8rem; font-weight:700; color:#345370; margin-bottom:5px;">CERTIFICATE COURSE</p>
+                    <h3>CRIMINAL<br>DRAFTING</h3>
+                </div>
+                <div class="card-category cat-course">COURSE, OPPORTUNITY</div>
+                <a href="#" class="card-title">Certificate Course on Criminal Drafting by Lextrusta: Register by 06 June 2026</a>
+                <p class="card-desc">A practical certificate course covering complaints, bail applications, affidavits and courtroom drafting</p>
+            </article>
+
+            <article class="card" data-category="recruitment">
+                <div class="card-img img-recruit">
+                    <h3>RAKSHA UNIVERSITY<br><br><span style="font-size:0.9rem; color:#666; border:none; padding:0;">RECRUITMENT NOTICE</span></h3>
+                </div>
+                <div class="card-category cat-recruit">RECRUITMENT</div>
+                <a href="#" class="card-title">Recruitment Notification for Legal Assistant at Rashtriya Raksha University | Gujarat | Salary up to Rs 60,000</a>
+                <p class="card-desc">Recruitment update for legal assistant candidates interested in research, compliance, institutional</p>
+            </article>
+
+            <div class="no-results" id="noResultsMsg">No opportunities found matching your criteria.</div>
+        </div>
+    </section>
+
+    <script>
+        // --- Navbar Scroll Effect & Dropdown Logic (Copied from index.html) ---
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const pubDropdown = document.getElementById('pubDropdown');
+        const pubDropBtn = document.getElementById('pubDropBtn');
+
+        if (pubDropBtn && pubDropdown) {
+            pubDropBtn.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                event.stopPropagation(); 
+                pubDropdown.classList.toggle('active');
+            });
+
+            window.addEventListener('click', function(event) {
+                if (!pubDropdown.contains(event.target)) {
+                    pubDropdown.classList.remove('active');
+                }
+            });
+        }
+
+        // --- Original Blog Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.card');
+            const searchInput = document.getElementById('searchInput');
+            const activeCount = document.getElementById('activeCount');
+            const noResultsMsg = document.getElementById('noResultsMsg');
+
+            let currentFilter = 'all';
+            let currentSearch = '';
+
+            // Initialize Count
+            updateCount();
+
+            // Filter Button Click Event
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active class
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    currentFilter = btn.getAttribute('data-filter');
+                    filterCards();
+                });
+            });
+
+            // Search Input Event
+            searchInput.addEventListener('input', (e) => {
+                currentSearch = e.target.value.toLowerCase();
+                filterCards();
+            });
+
+            // Logic to filter and show/hide cards
+            function filterCards() {
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    const textContent = card.innerText.toLowerCase();
+                    
+                    const matchesFilter = (currentFilter === 'all' || category === currentFilter);
+                    const matchesSearch = textContent.includes(currentSearch);
+
+                    if (matchesFilter && matchesSearch) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                activeCount.innerText = visibleCount;
+                
+                if (visibleCount === 0) {
+                    noResultsMsg.style.display = 'block';
+                } else {
+                    noResultsMsg.style.display = 'none';
+                }
+            }
+
+            function updateCount() {
+                activeCount.innerText = cards.length;
+            }
+        });
+    </script>
+    <div id="footer-placeholder"></div>
+
+    <script>
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
+</body>
+</html>

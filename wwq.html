@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advisory Board | Lextrusta</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* --- Color Palette & Variables --- */
+        :root {
+            --midnight-navy: #071426;
+            --royal-blue: #123458;
+            --luxury-gold: #C8A96A;
+            --ivory: #FAF7F2;
+            --white: #FFFFFF;
+            --dark-navy: #0F172A;
+            --light-gray: #E8E8E8;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --radius: 16px;
+        }
+
+        /* --- Global Reset & Typography --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--ivory);
+            color: var(--dark-navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(7, 20, 38, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--luxury-gold);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--luxury-gold);
+        }
+
+        /* --- Click Dropdown Rules --- */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--midnight-navy);
+            border: 1px solid rgba(200, 169, 106, 0.3);
+            min-width: 180px;
+            border-radius: 4px;
+            list-style: none;
+            padding: 10px 0;
+            margin-top: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 1001;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content li a {
+            color: var(--white) !important;
+            padding: 12px 20px;
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .dropdown-content li a:hover {
+            background-color: var(--royal-blue);
+            color: var(--luxury-gold) !important;
+            padding-left: 24px;
+        }
+
+        /* --- Buttons --- */
+        .btn-gold {
+            background-color: var(--luxury-gold);
+            color: var(--midnight-navy);
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--luxury-gold);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--luxury-gold);
+            box-shadow: 0 4px 15px rgba(200, 169, 106, 0.3);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(7, 20, 38, 0.85), rgba(7, 20, 38, 0.95)), url('https://i.pinimg.com/736x/dc/24/34/dc243494ba5bc0aa8ef506f3094279cd.jpg') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 4rem;
+            max-width: 900px;
+            margin-bottom: 20px;
+            animation: fadeUp 1s ease forwards 0.2s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero p {
+            color: var(--light-gray);
+            font-size: 1.15rem;
+            max-width: 800px;
+            animation: fadeUp 1s ease forwards 0.4s;
+            opacity: 0;
+            transform: translateY(30px);
+            line-height: 1.7;
+        }
+
+        /* --- Team Sections (Glassmorphism) --- */
+        .section-padding {
+            padding: 100px 5%;
+        }
+
+        .partners-section {
+            background-color: var(--midnight-navy);
+            color: var(--white);
+        }
+
+        .partners-section .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .partners-section .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--white);
+        }
+
+        .partners-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .partner-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .partner-card:hover {
+            border-color: rgba(200, 169, 106, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: translateY(-10px);
+        }
+
+        .partner-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--luxury-gold);
+            padding: 5px;
+        }
+
+        .partner-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .partner-role {
+            color: var(--luxury-gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        /* --- Interactive Profile Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 20, 38, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--white);
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            border-radius: var(--radius);
+            padding: 40px;
+            position: relative;
+            transform: translateY(30px) scale(0.95);
+            transition: var(--transition);
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            border-top: 5px solid var(--luxury-gold);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--dark-navy);
+            cursor: pointer;
+            background: var(--light-gray);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--luxury-gold);
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+
+        .profile-modal-body {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .profile-modal-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--luxury-gold);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .profile-modal-info {
+            flex-grow: 1;
+            color: var(--dark-navy);
+        }
+
+        .profile-modal-info h3 {
+            font-size: 2.2rem;
+            color: var(--midnight-navy);
+            margin-bottom: 5px;
+        }
+
+        .profile-modal-info .modal-role {
+            color: var(--luxury-gold);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .profile-modal-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            margin-top: 20px;
+            color: var(--midnight-navy);
+        }
+
+        .profile-modal-info p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        .profile-socials {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .profile-socials a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--light-gray);
+            color: var(--midnight-navy);
+            border-radius: 50%;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .profile-socials a:hover {
+            background: var(--luxury-gold);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(200, 169, 106, 0.4);
+        }
+
+        /* --- CTA Newsletter Style Container --- */
+        .newsletter-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--midnight-navy);
+            border-radius: 24px;
+            padding: 60px;
+            text-align: center;
+            border: 1px solid var(--luxury-gold);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-container h2 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #040A14;
+            color: var(--light-gray);
+            padding: 60px 5% 20px;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+            .partners-section .section-header h2 { font-size: 2.2rem; }
+            .profile-modal-body {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .profile-modal-img {
+                margin-bottom: 20px;
+            }
+            .profile-socials {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="index.html" class="logo">Lextrusta <span>Trust The Law</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="dropdown" id="pubDropdown">
+                <a href="#" class="dropbtn" id="pubDropBtn">Publications <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="blogs.html">Blog</a></li>
+                    <li><a href="article.html">Article</a></li>
+                    <li><a href="research.html">Research Paper</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="careers.html">Career</a></li>
+            <li><a href="opportunities.html">Opportunities</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="advisory.html">Advisory Board</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <img src="logo.jpeg" alt="Lextrusta Logo" style="height: 70px; width: auto; display: block; border-radius: 4px;">
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Advisory <span>Board</span></h1>
+        <p>Meet the distinguished legal professionals and advisors whose expertise, guidance, and vision strengthen our organization and support our mission of delivering excellence in the legal profession.</p>
+    </header>
+
+    <section class="section-padding partners-section">
+        <div class="partners-grid">
+            
+            <!-- Card 1: Adv. Amar Anshul -->
+            <div class="partner-card" onclick="openProfile('Adv. Amar Anshul', 'Advisory Board Member', 'amar.jepg.png', 'Advocate Amar Anshul is an esteemed legal consultant with extensive experience in corporate governance, compliance, and multi-jurisdictional strategic planning.')">
+                <img src="amar.jepg.png" alt="Adv. Amar Anshul" class="partner-img">                
+                <h3>Adv. Amar Anshul</h3>
+                <div class="partner-role">Advisory Board Member</div>
+            </div>
+
+            <!-- Card 2: Adv. Ananya Shrivastav -->
+            <div class="partner-card" onclick="openProfile('Adv. Ananya Shrivastav', 'Advisory Board Member', 'ananya.jpeg', 'Advocate Ananya Shrivastav specializes in constitutional litigation, civil laws, and judicial review procedures with a dedicated focus on public interest advocacy.')">
+                <img src="ananya.jpeg" alt="Adv. Ananya Shrivastav" class="partner-img">                
+                <h3>Adv. Ananya Shrivastav</h3>
+                <div class="partner-role">Advisory Board Member</div>
+            </div>
+            
+            <!-- Card 3: Adv. Sonali Satpathy -->
+            <div class="partner-card" onclick="openProfile('Adv. Sonali Satpathy', 'Founding Partner, JUSTICE Law Firm', 'sonali.jpeg', 'Advocate Sonali Satpathy is a veteran of dispute resolution and arbitration, leading high-stakes litigations and pioneering modern arbitration frameworks globally.')">
+                <img src="sonali.jpeg" alt="Adv. Sonali Satpathy" class="partner-img">                
+                <h3>Adv. Sonali Satpathy</h3>
+                <div class="partner-role" style="text-transform: none; letter-spacing: 0;">Advisory Board Member</div>
+            </div>
+
+            <!-- Card 4: Adv. Manali Rathore Chauhan -->
+            <div class="partner-card" onclick="openProfile('Adv. Manali Rathore Chauhan', 'Advisory Board Member', 'manali.jpeg', 'Advocate Manali Rathore Chauhan specializes in family court structures, property settlement disputes, and civil advocacy with over a decade of practicing experience.')">
+                <img src="manali.jpeg" alt="Adv. Manali Rathore Chauhan" class="partner-img">                
+                <h3 style="font-size: 1.4rem;">Adv. Manali Rathore Chauhan</h3>
+                <div class="partner-role">Advisory Board Member</div>
+            </div>
+
+            <!-- Card 5: Adv. Twinkle Baghel -->
+            <div class="partner-card" onclick="openProfile('Adv. Twinkle Baghel', 'Advisory Board Member', 'twinkle.jpeg.png', 'Advocate Twinkle Baghel is widely recognized for her critical analytical contributions to constitutional laws, public policy reforms, and administrative law systems.')">
+                <img src="twinkle.jpeg.png" alt="Adv. Twinkle Baghel" class="partner-img">                
+                <h3>Adv. Twinkle Baghel</h3>
+                <div class="partner-role">Advisory Board Member</div>
+            </div>
+
+            <!-- Card 6: Adv. Anshika Yadav -->
+            <div class="partner-card" onclick="openProfile('Adv. Anshika Yadav', 'Advisory Board Member', 'anshika.jpeg', 'Advocate Anshika Yadav focuses heavily on criminal defense architectures, human rights protocols, and procedural litigation adjustments across supreme judicial boards.')">
+                <img src="anshika.jpeg" alt="Adv. Anshika Yadav" class="partner-img">                
+                <h3>Adv. Anshika Yadav</h3>
+                <div class="partner-role">Advisory Board Member</div>
+            </div>
+
+            <!-- Card 7: Adv. Khushbu Pandit -->
+            <div class="partner-card" onclick="openProfile('Adv. Khushbu Pandit', 'Advisory Board Member', 'khushbu.jpeg', 'Advocate Khushbu Pandit excels in Intellectual Property Rights (IPR), commercial patent registrations, cyber-security acts, and emerging technology law guidelines.')">
+                <img src="khushbu.jpeg" alt="Adv. Khushbu Pandit" class="partner-img">                
+                <h3>Adv. Khushbu Pandit</h3>
+                <div class="partner-role">Advisory Board Member</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modal Elements Layout Section -->
+    <div class="modal-overlay" id="profileModal" aria-hidden="true" role="dialog">
+        <div class="modal-content">
+            <button class="modal-close" id="closeProfileModal" aria-label="Close Profile"><i class="fa-solid fa-xmark"></i></button>
+            <div class="profile-modal-body">
+                <img src="" alt="Profile Image" class="profile-modal-img" id="modalImage">
+                <div class="profile-modal-info">
+                    <h3 id="modalName">Name Placeholder</h3>
+                    <span class="modal-role" id="modalDesignation">Designation Placeholder</span>
+                    
+                    <h4>Biography</h4>
+                    <p id="modalBio">Biography Text Placeholder...</p>
+                    
+                    <h4>Practice Areas</h4>
+                    <p id="modalPractice">Constitutional Law • Corporate Litigation • Dispute Resolution</p>
+                    
+                    <div class="profile-socials">
+                        <a href="mailto:placeholder@lextrusta.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                        <a href="#" aria-label="LinkedIn" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section-padding" style="background-color: var(--ivory);">
+        <div class="section-header" style="margin-bottom: 30px;">
+            <h2 style="color: var(--midnight-navy); font-size: 2.5rem; text-align: center;">Our Advisory Board</h2>
+        </div>
+        <p style="max-width: 900px; margin: 0 auto; color: var(--dark-navy); font-size: 1.15rem; line-height: 1.8; text-align: center;">
+            The Advisory Board at Lextrusta plays a pivotal role in shaping the strategic direction of our platform. Comprising seasoned legal veterans, visionary practitioners, and academic scholars, the board provides critical oversight and mentorship. They ensure our initiatives uphold the highest standards of legal excellence, foster robust professional networks, and empower the next generation of legal minds to navigate complex statutory landscapes with integrity, precision, and foresight.
+        </p>
+    </section>
+
+    <section class="section-padding partners-section">
+        <div class="newsletter-container" style="text-align: center; max-width: 1000px;">
+            <h2>Interested in Collaborating With Our Advisory Board?</h2>
+            <p style="margin-bottom: 40px; font-size: 1.1rem; color: var(--light-gray);">Reach out to explore partnership opportunities, seek professional mentorship, or invite our experts for legal discourse and strategic alliances.</p>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lextrusta@gmail.com" class="btn-gold" style="display: inline-block; padding: 15px 45px; font-size: 1rem; border-radius: 8px;">Contact Us</a>
+        </div>
+    </section>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Click to Toggle Dropdown Menu Logic
+        const pubDropdown = document.getElementById('pubDropdown');
+        const pubDropBtn = document.getElementById('pubDropBtn');
+
+        pubDropBtn.addEventListener('click', function(event) {
+            event.preventDefault(); 
+            event.stopPropagation(); 
+            pubDropdown.classList.toggle('active');
+        });
+
+        window.addEventListener('click', function(event) {
+            if (!pubDropdown.contains(event.target)) {
+                pubDropdown.classList.remove('active');
+            }
+        });
+
+        // Profile Modal Logic
+        const profileModal = document.getElementById('profileModal');
+        const closeProfileBtn = document.getElementById('closeProfileModal');
+        
+        // Modal Data Targets
+        const modalName = document.getElementById('modalName');
+        const modalDesignation = document.getElementById('modalDesignation');
+        const modalImage = document.getElementById('modalImage');
+        const modalBio = document.getElementById('modalBio'); 
+
+        function openProfile(name, designation, imageUrl, bio) {
+            modalName.textContent = name;
+            modalDesignation.textContent = designation;
+            modalImage.src = imageUrl;
+            modalBio.textContent = bio; 
+            
+            profileModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Close Modal via Button
+        closeProfileBtn.addEventListener('click', () => {
+            profileModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        });
+
+        // Close Modal via Outside Click
+        profileModal.addEventListener('click', (e) => {
+            if (e.target === profileModal) {
+                profileModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close via Escape Key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && profileModal.classList.contains('active')) {
+                profileModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+    
+    <div id="footer-placeholder"></div>
+
+    <script>
+      // Dynamically load the global footer
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>

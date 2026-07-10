@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lextrusta | Premium Legal News</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* --- Color Palette & Variables --- */
+        :root {
+            --midnight-navy: #071426;
+            --royal-blue: #123458;
+            --luxury-gold: #C8A96A;
+            --ivory: #FAF7F2;
+            --white: #FFFFFF;
+            --dark-navy: #0F172A;
+            --light-gray: #E8E8E8;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --radius: 16px;
+        }
+
+        /* --- Global Reset & Typography --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Enables smooth scrolling to the Advisory Board section */
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--ivory);
+            color: var(--dark-navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(7, 20, 38, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--luxury-gold);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--luxury-gold);
+        }
+
+        /* --- Click Dropdown Rules --- */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Dropdown menu hidden by default */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--midnight-navy);
+            border: 1px solid rgba(200, 169, 106, 0.3);
+            min-width: 180px;
+            border-radius: 4px;
+            list-style: none;
+            padding: 10px 0;
+            margin-top: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 1001;
+        }
+
+        /* Show menu only when .active class is applied via JS */
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        /* Rotate arrow when active */
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content li a {
+            color: var(--white) !important;
+            padding: 12px 20px;
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .dropdown-content li a:hover {
+            background-color: var(--royal-blue);
+            color: var(--luxury-gold) !important;
+            padding-left: 24px;
+        }
+
+        .btn-gold {
+            background-color: var(--luxury-gold);
+            color: var(--midnight-navy);
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--luxury-gold);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--luxury-gold);
+            box-shadow: 0 4px 15px rgba(200, 169, 106, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--midnight-navy);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(7, 20, 38, 0.8), rgba(7, 20, 38, 0.95)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf9HBu3SkTmf1HqTfDATuI9TpnXYjS90mfaBVEYf49WzGtgaGj2jD_N47r&s=10') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 4.5rem;
+            max-width: 900px;
+            margin-bottom: 20px;
+            animation: fadeUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero h1 span {
+            color: var(--luxury-gold);
+            font-style: italic;
+        }
+
+        .hero p {
+            color: var(--light-gray);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            animation: fadeUp 1s ease forwards 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            animation: fadeUp 1s ease forwards 0.6s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* --- Floating Stats --- */
+        .stats-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 60px;
+            animation: fadeUp 1s ease forwards 0.9s;
+            opacity: 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(200, 169, 106, 0.2);
+            padding: 20px 30px;
+            border-radius: var(--radius);
+            color: var(--white);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--luxury-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--luxury-gold);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* --- Bento Grid Categories --- */
+        .section-padding {
+            padding: 100px 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--midnight-navy);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .bento-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            border: 1px solid var(--light-gray);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(7, 20, 38, 0.05);
+            border-color: var(--luxury-gold);
+        }
+
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--luxury-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .bento-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .bento-icon {
+            font-size: 1.5rem;
+            color: var(--royal-blue);
+            margin-bottom: 20px;
+            background: var(--ivory);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .bento-card h3 {
+            font-size: 1.2rem;
+            color: var(--midnight-navy);
+            margin-bottom: 10px;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+
+        .bento-card .arrow-icon {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            color: var(--luxury-gold);
+            opacity: 0;
+            transition: var(--transition);
+            transform: translateX(-10px);
+        }
+
+        .bento-card:hover .arrow-icon {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Modal / Popup Styles --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 20, 38, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--white);
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            border-radius: var(--radius);
+            padding: 40px;
+            position: relative;
+            transform: translateY(30px) scale(0.95);
+            transition: var(--transition);
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            border-top: 5px solid var(--luxury-gold);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--dark-navy);
+            cursor: pointer;
+            background: var(--light-gray);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--luxury-gold);
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            color: var(--midnight-navy);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-right: 30px;
+        }
+
+        .modal-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 15px;
+            color: var(--dark-navy);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .modal-list li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--luxury-gold);
+        }
+
+        /* --- Founding Partners & Advisory Board --- */
+        .partners-section {
+            background-color: var(--midnight-navy);
+            color: var(--white);
+        }
+
+        .partners-section .section-header h2 {
+            color: var(--white);
+        }
+
+        .partners-section .section-header p {
+            color: var(--light-gray);
+        }
+
+        .partners-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .partner-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            max-width: 350px;
+            transition: var(--transition);
+        }
+
+        .partner-card:hover {
+            border-color: rgba(200, 169, 106, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: translateY(-10px);
+        }
+
+        .partner-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--luxury-gold);
+            padding: 5px;
+        }
+
+        .partner-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .partner-role {
+            color: var(--luxury-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        /* --- Newsletter --- */
+        .newsletter-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--midnight-navy);
+            border-radius: 24px;
+            padding: 60px;
+            text-align: center;
+            border: 1px solid var(--luxury-gold);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-container h2 {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .news-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 30px auto 0;
+        }
+
+        .news-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            color: var(--white);
+            font-family: var(--font-body);
+        }
+        
+        .news-form input:focus {
+            outline: none;
+            border-color: var(--luxury-gold);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #040A14;
+            color: var(--light-gray);
+            padding: 60px 5% 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--luxury-gold);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .news-form { flex-direction: column; }
+            .modal-content { padding: 30px 20px; }
+            .modal-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="index.html" class="logo">Lextrusta <span>Trust The Law</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="dropdown" id="pubDropdown">
+                <a href="#" class="dropbtn" id="pubDropBtn">Publications <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="blogs.html">Blog</a></li>
+                    <li><a href="article.html">Article</a></li>
+                    <li><a href="research.html">Research Paper</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="careers.html">Career</a></li>
+            <li><a href="opportunities.html">Opportunities</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="advisory.html">Advisory Board</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <img src="logo.jpeg" alt="Lextrusta Logo" style="height: 70px; width: auto; display: block; border-radius: 4px;">
+        </div>
+    </nav>
+    
+    <header class="hero hero-fullscreen">
+        <h1>India's Most Trusted<br><span>Legal Intelligence</span> Platform</h1>
+        <p>Bridging the gap between elite legal practice and the next generation with high-quality research, media, and statutory insights</p>
+        <div class="hero-btns">
+            <button class="btn-gold" onclick="window.location.href='article.html'">Explore Articles</button>
+            <button class="btn-outline" onclick="window.location.href='https://mail.google.com/mail/?view=cm&fs=1&to=official.lextrusta@gmail.com'">Join Network</button>
+        </div>
+        
+        <div class="stats-container">
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="section-header">
+            <h2>Areas of Expertise</h2>
+            <p>Dedicated to Excellence, Lextrusta provides comprehensive aspects of law, with particular focus on the following areas</p>
+        </div>
+        <div class="bento-grid" id="expertiseGrid">
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="expertiseModal">
+        <div class="modal-content">
+            <div class="modal-close" id="closeModal"><i class="fa-solid fa-xmark"></i></div>
+            <h3 class="modal-title" id="modalTitle">Category Title</h3>
+            <ul class="modal-list" id="modalList">
+            </ul>
+        </div>
+    </div>
+
+    <!-- Existing Founders Section -->
+    <section class="section-padding partners-section">
+        <div class="section-header">
+            <h2>Visionaries Behind Lextrusta</h2>
+            <p>Meet the founding minds shaping tomorrow's legal discourse.</p>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-card">
+                <img src="rahi.jpeg" alt="Rahil Aziz" class="partner-img">                
+                <h3>Rahil Aziz</h3>
+                <div class="partner-role">Co-Founder</div>
+                <p style="font-size:0.9rem; color:#ccc; margin-bottom: 20px;"></p>
+                <div>
+                    <a href="https://www.linkedin.com/in/rahil-aziz-bb772727b" target="_blank" style="color:var(--luxury-gold); margin: 0 10px; font-size: 1.3rem;"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="partner-card">
+                <img src="himanshu.jpeg" alt="Himanshu Bansal" class="partner-img">                
+                <h3>Himanshu Bansal</h3>
+                <div class="partner-role">Co-Founder</div>
+                <p style="font-size:0.9rem; color:#ccc; margin-bottom: 20px;"></p>
+                <div>
+                    <a href="https://www.linkedin.com/in/himanshu-bansal-8732791a6?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" style="color:var(--luxury-gold); margin: 0 10px; font-size: 1.2rem;"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section-padding">
+        <div class="newsletter-container">
+            <h2>Stay Ahead of the Curve</h2>
+            <p>Subscribe to our elite briefing for the latest judgments, insights, and opportunities.</p>
+            <form class="news-form" onsubmit="event.preventDefault();">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn-gold">Subscribe</button>
+            </form>
+            <p style="font-size: 0.75rem; margin-top: 15px; opacity: 0.5;">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Click to Toggle Dropdown Menu Logic
+        const pubDropdown = document.getElementById('pubDropdown');
+        const pubDropBtn = document.getElementById('pubDropBtn');
+
+        pubDropBtn.addEventListener('click', function(event) {
+            event.preventDefault(); 
+            event.stopPropagation(); 
+            pubDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown completely if user clicks anywhere else outside the menu
+        window.addEventListener('click', function(event) {
+            if (!pubDropdown.contains(event.target)) {
+                pubDropdown.classList.remove('active');
+            }
+        });
+
+        // Expertise Data Dictionary
+        const expertiseData = [
+            {
+                title: "Constitutional & Administrative Law",
+                icon: "fa-scale-balanced",
+                items: [
+                    "Writ petitions",
+                    "Fundamental Rights violations under Articles 14, 19 & 21",
+                    "Public Interest Litigation (PIL) before High Courts & Supreme Court",
+                    "Challenge to unconstitutional legislation",
+                    "Service matters against government departments",
+                    "Arbitrary & unlawful administrative orders",
+                    "Violation of principles of natural justice",
+                    "Matters of federalism & separation of powers"
+                ]
+            },
+            {
+                title: "Corporate & Commercial Law",
+                icon: "fa-building",
+                items: [
+                    "Company incorporation & governance disputes",
+                    "Mergers, Acquisitions & Joint Ventures",
+                    "Minority shareholder oppression & mismanagement (NCLT)",
+                    "Director disqualification proceedings",
+                    "Breach of shareholders agreements & partnership deeds",
+                    "Contract drafting, review & enforcement",
+                    "Business fraud & financial irregularities",
+                    "Winding-up & liquidation petitions",
+                    "SEBI regulatory violations & securities law matters",
+                    "Competition law & anti-trust matters"
+                ]
+            },
+            {
+                title: "Criminal Law",
+                icon: "fa-gavel",
+                items: [
+                    "FIR registration, quashing & anticipatory bail",
+                    "Bail applications before Sessions Courts, High Courts & Supreme Court",
+                    "Cheating, fraud & forgery cases",
+                    "Assault, hurt & grievous hurt",
+                    "Dowry harassment & cruelty (Section 498A IPC / BNS)",
+                    "Murder & culpable homicide",
+                    "Kidnapping, abduction & extortion",
+                    "Theft, robbery & dacoity",
+                    "Drug-related offences under NDPS Act",
+                    "Custodial violence & police misconduct",
+                    "Juvenile justice matters",
+                    "Victim compensation & criminal appeals"
+                ]
+            },
+            {
+                title: "Family Law",
+                icon: "fa-people-roof",
+                items: [
+                    "Divorce — contested & mutual consent",
+                    "Judicial separation",
+                    "Maintenance & alimony",
+                    "Child custody & guardianship",
+                    "Adoption under Hindu & secular law",
+                    "Domestic violence cases (PWDVA, 2005)",
+                    "Restitution of conjugal rights",
+                    "Marriage registration disputes",
+                    "Nikah, Mehr, Talaq, Khula & Mubarat under Muslim law",
+                    "Succession & inheritance disputes",
+                    "Waqf-related matters"
+                ]
+            },
+            {
+                title: "Real Estate Law",
+                icon: "fa-city",
+                items: [
+                    "Property title disputes & title verification",
+                    "Partition suits & co-ownership disputes",
+                    "Sale deed & agreement to sell disputes",
+                    "Landlord-tenant & rent recovery matters",
+                    "RERA complaints & builder disputes",
+                    "Encroachment & trespass cases",
+                    "Mortgage & hypothecation disputes",
+                    "Land acquisition & compensation matters",
+                    "Property fraud & forgery cases",
+                    "Injunction & stay orders in property matters"
+                ]
+            },
+            {
+                title: "Trust, Will, HUF & Estate Planning",
+                icon: "fa-file-signature",
+                items: [
+                    "Drafting & registration of Wills",
+                    "Probate & Letters of Administration",
+                    "Trust formation, management & dispute resolution",
+                    "Hindu Undivided Family (HUF) constitution & partition",
+                    "Succession disputes & inheritance claims",
+                    "Nominee disputes & beneficiary rights",
+                    "Estate administration for NRIs & overseas clients",
+                    "Charitable trust registration & compliance",
+                    "Living Wills & advance medical directives"
+                ]
+            },
+            {
+                title: "Dispute Resolution & ADR",
+                icon: "fa-handshake",
+                items: [
+                    "Domestic arbitration",
+                    "Pre-litigation mediation & settlement",
+                    "Motor accident & insurance claims at Lok Adalat",
+                    "Cheque bounce settlement through ADR",
+                    "Family & property mediation",
+                    "Consumer dispute conciliation",
+                    "Enforcement of arbitral awards",
+                    "Court-annexed mediation proceedings"
+                ]
+            },
+            {
+                title: "Banking & Insolvency Law",
+                icon: "fa-piggy-bank",
+                items: [
+                    "Cheque dishonour cases (Section 138 NI Act)",
+                    "SARFAESI Act proceedings — borrower & guarantor defence",
+                    "Debt Recovery Tribunal (DRT) matters",
+                    "Banking fraud & unauthorised transactions",
+                    "Corporate Insolvency Resolution Process (CIRP) before NCLT",
+                    "Personal Insolvency under IBC",
+                    "Liquidation & asset distribution matters",
+                    "Banking Ombudsman complaints",
+                    "Credit card, personal loan & EMI disputes"
+                ]
+            },
+            {
+                title: "Intellectual Property Law",
+                icon: "fa-lightbulb",
+                items: [
+                    "Trademark registration, opposition & infringement",
+                    "Copyright registration & violation cases",
+                    "Patent filing & enforcement",
+                    "Design registration & design piracy",
+                    "Passing off & unfair competition",
+                    "Trade secret theft & confidentiality breach",
+                    "Domain name disputes (UDRP)",
+                    "IP licensing & assignment disputes",
+                    "Social media copyright infringement"
+                ]
+            },
+            {
+                title: "Cyber Law",
+                icon: "fa-shield-halved",
+                items: [
+                    "Online fraud & financial cybercrime",
+                    "Hacking, data breach & malware cases",
+                    "Social media defamation & morphed images",
+                    "Identity theft & impersonation",
+                    "Cyberstalking & online harassment",
+                    "Dark web & illegal content matters",
+                    "Data privacy violations & DPDP Act compliance",
+                    "Email, OTP & phishing fraud",
+                    "Ransomware & corporate cyber attacks"
+                ]
+            },
+            {
+                title: "Labour & Service Law",
+                icon: "fa-helmet-safety",
+                items: [
+                    "Wrongful termination & retrenchment disputes",
+                    "Unpaid wages, dues & gratuity recovery",
+                    "Workplace sexual harassment (POSH Act)",
+                    "ESI & Provident Fund disputes",
+                    "Industrial disputes before Labour Courts & Tribunals",
+                    "Government employee service matters (CAT & High Court)",
+                    "Suspension, dismissal & departmental inquiry cases",
+                    "Contract labour & domestic worker rights",
+                    "Trade union recognition & collective bargaining"
+                ]
+            },
+            {
+                title: "Tax Consultancy",
+                icon: "fa-file-invoice-dollar",
+                items: [
+                    "Income tax assessments & appeals",
+                    "GST disputes & refund matters",
+                    "TDS defaults & penalties",
+                    "International taxation & transfer pricing",
+                    "Tax planning for individuals, HUFs & businesses",
+                    "Custom duty & excise disputes",
+                    "Tax notices & scrutiny proceedings",
+                    "Income Tax Appellate Tribunal (ITAT) matters",
+                    "High Court & Supreme Court tax appeals"
+                ]
+            },
+            {
+                title: "Consumer Law",
+                icon: "fa-cart-shopping",
+                items: [
+                    "Defective product & deficient service complaints",
+                    "Builder-buyer disputes under RERA & Consumer Forum",
+                    "Insurance claim rejections",
+                    "Medical negligence before consumer forums",
+                    "E-commerce fraud & online shopping disputes",
+                    "Education institution fee & service disputes",
+                    "Utility service (electricity, telecom, banking) complaints",
+                    "Unfair trade practice & misleading advertisement matters"
+                ]
+            },
+            {
+                title: "Insurance Law",
+                icon: "fa-car-burst",
+                items: [
+                    "Motor accident insurance claim disputes",
+                    "Health & mediclaim policy rejection cases",
+                    "Life insurance claim denial matters",
+                    "Property & fire insurance disputes",
+                    "Marine & cargo insurance claims",
+                    "Insurance fraud & misrepresentation cases",
+                    "IRDAI complaints & Insurance Ombudsman proceedings",
+                    "Reinsurance & subrogation disputes"
+                ]
+            },
+            {
+                title: "Human Rights Law",
+                icon: "fa-person-rays",
+                items: [
+                    "Custodial torture & police brutality cases",
+                    "Bonded labour & child labour complaints",
+                    "Rights of prisoners & undertrial detainees",
+                    "Rights of students — exam fraud & institutional negligence",
+                    "Dalit, tribal & minority rights violations",
+                    "Rights of persons with disabilities",
+                    "Forced displacement & land acquisition cases",
+                    "NHRC & SHRC complaint filing",
+                    "Compensation claims against state negligence"
+                ]
+            },
+            {
+                title: "Media, Entertainment & Immigration",
+                icon: "fa-clapperboard",
+                items: [
+                    "Defamation — print, broadcast & digital media",
+                    "Content copyright & streaming rights violations",
+                    "Talent & production agreement disputes",
+                    "Visa refusals & immigration appeals",
+                    "Overseas Citizenship of India (OCI) matters",
+                    "Foreign nationals — work permit & stay matters",
+                    "NRI property & succession disputes"
+                ]
+            },
+            {
+                title: "Environment, Healthcare & Food Law",
+                icon: "fa-leaf",
+                items: [
+                    "Environmental pollution & industrial damage cases (NGT)",
+                    "Wildlife protection & forest rights violations",
+                    "Medical negligence & hospital liability",
+                    "Drug licensing & pharmaceutical regulation disputes",
+                    "Clinical trial & patient rights matters",
+                    "FSSAI food safety violations & licensing disputes",
+                    "Adulteration, mislabelling & food fraud cases",
+                    "Public health regulation compliance"
+                ]
+            },
+            {
+                title: "Mergers and Acquisitions (M&A)",
+                icon: "fa-user-tie",
+                items: [
+                    "Due Diligence Audits",
+                    "Corporate Restructuring",
+                    "Cross-border transaction management"
+                ]
+            }
+        ];
+
+        // Populate Bento Grid & Attach Listeners
+        const gridContainer = document.getElementById('expertiseGrid');
+        const modal = document.getElementById('expertiseModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalList = document.getElementById('modalList');
+        const closeBtn = document.getElementById('closeModal');
+
+        expertiseData.forEach((category, index) => {
+            const card = document.createElement('div');
+            card.className = 'bento-card';
+            card.innerHTML = `
+                <div class="bento-icon"><i class="fa-solid ${category.icon}"></i></div>
+                <h3>${category.title}</h3>
+                <i class="fa-solid fa-arrow-right arrow-icon"></i>
+            `;
+            
+            // Click Event to Open Modal
+            card.addEventListener('click', () => {
+                modalTitle.textContent = category.title;
+                modalList.innerHTML = '';
+                
+                category.items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    modalList.appendChild(li);
+                });
+                
+                modal.classList.add('active');
+            });
+            
+            gridContainer.appendChild(card);
+        });
+
+        // Close Modal Logic
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Close Modal on Outside Click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+    
+    <!-- 1. The placeholder where the footer will load -->
+    <div id="footer-placeholder"></div>
+
+    <!-- 2. The script that dynamically pulls the code from footer.html -->
+    <script>
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
